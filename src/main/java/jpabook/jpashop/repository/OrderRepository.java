@@ -12,14 +12,16 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class OrderRepository {
 
-    private final EntityManager em;
     private final JPAQueryFactory query;
+
+    private final EntityManager em;
 
     private QOrder order = QOrder.order;
     private QMember member = QMember.member;
