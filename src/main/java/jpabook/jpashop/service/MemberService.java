@@ -22,15 +22,6 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    private void validateDuplicateMember(Member member) {
-        //EXCEPTION
-        List<Member> members = memberRepository.findByName(member.getName());
-
-        if (!members.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
-    }
-
     // 회원 전체 조회
     public List<Member> findMembers() {
         return memberRepository.findAll();
@@ -39,5 +30,14 @@ public class MemberService {
     // 회원 단건 조회
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+
+    private void validateDuplicateMember(Member member) {
+        //EXCEPTION
+        List<Member> members = memberRepository.findByName(member.getName());
+
+        if (!members.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        }
     }
 }
