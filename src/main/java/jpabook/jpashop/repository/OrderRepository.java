@@ -1,6 +1,5 @@
 package jpabook.jpashop.repository;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpabook.jpashop.domain.Order;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
@@ -58,4 +56,19 @@ public class OrderRepository {
     }
 
 
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
+    public List<SimpleOrderDto> findOrderDtos() {
+        return em.createQuery(
+                "select o from Order o " +
+                        "join o.member m " +
+                        "join o.delivery d", SimpleOrderDto.class)
+                .getResultList();
+    }
 }
