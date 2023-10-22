@@ -63,12 +63,4 @@ public class OrderRepository {
                         "join fetch o.delivery d", Order.class)
                 .getResultList();
     }
-
-    public List<SimpleOrderDto> findOrderDtos() {
-        return em.createQuery(
-                "select o from Order o " +
-                        "join o.member m " +
-                        "join o.delivery d", SimpleOrderDto.class)
-                .getResultList();
-    }
 }
